@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Layout from '../components/Layout';
 import LineChartComponent from '../components/LineChartComponent';
 import { CurrencyDollarIcon } from '@heroicons/react/solid'
+import { server } from '../config/index'
 
 function SalarioMinimo({json, data}) {
 
@@ -109,7 +110,7 @@ export async function getServerSideProps() {
     projecaoQuarentaAnos: transformarBR(10233),
     projecaoCinquentaAnos: transformarBR(18103)
   }
-  const result = await fetch("http://localhost:3000/api/salarioMinimo")
+  const result = await fetch(`${server}/api/salarioMinimo`)
   const json = await result.json()
   return {
     props: {json, data}

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Layout from '../components/Layout';
 import LineChartComponent from '../components/LineChartComponent';
 import { UserGroupIcon } from '@heroicons/react/solid'
+import { server } from '../config/index'
 
 function Populacao({ data, json }) {
   return (
@@ -135,7 +136,7 @@ export async function getServerSideProps() {
     crescimentoAno: transformarBR(calcularCrescimentoAno()),
     crescimentoHoje: transformarBR(calcularCrescimentoHoje())
   }
-  const result = await fetch("http://localhost:3000/api/populacao")
+  const result = await fetch(`${server}/api/populacao`)
   const json = await result.json()
   return {
     props: { data, json }
