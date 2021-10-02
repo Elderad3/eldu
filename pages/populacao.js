@@ -14,97 +14,94 @@ function Populacao({ data, json }) {
       <div className="container">
         <div className="flex justify-between">
           <div className="mt-4">
-            <h1 className="text-2xl font-bold text-indigo-900">População do Brasil</h1>
-            <h4 className="text-sm font-semi-bold text-indigo-600">Dados consolidados da População Brasileira</h4>
+            <h1 className="text-2xl font-bold">População do Brasil</h1>
+            <h4 className="text-sm font-semi-bold">Dados consolidados da População Brasileira</h4>
           </div>
           <div>
           </div>
         </div>
         <div>
           <div className="grid mt-4 gap-4 md:grid-cols-1 lg:grid-cols-3">
-            <div className="p-6 bg-white  rounded-xl shadow-lg">
+            <div className="p-6 bg-white  rounded-xl shadow">
               <div>
                 <span className="text-sm font-semibold text-gray-400">População Atual</span>
                 <span className="text-xs text-gray-400"> (Estimada)(a)</span>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h1 className="text-xl font-bold">{data.populacao}</h1>
               </div>
             </div>
-            <div className="p-6 bg-white rounded-xl shadow-lg">
+            <div className="p-6 bg-white rounded-xl shadow">
               <div>
                 <span className="text-sm font-semibold text-gray-400">Nascimentos este ano</span>
                 <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h3 className="text-xl font-bold">{data.nascimentosAno}</h3>
               </div>
             </div>
-            <div className="p-6 bg-white rounded-xl shadow-lg">
+            <div className="p-6 bg-white rounded-xl shadow">
               <div>
                 <span className="text-sm font-semibold text-gray-400">Nascimentos hoje</span>
                 <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h3 className="text-xl font-bold">{data.nascimentosHoje}</h3>
               </div>
             </div>
           </div>
 
           <div className="grid mt-4 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <div className="p-6 bg-white  rounded-xl shadow-lg">
+            <div className="p-6 bg-white  rounded-xl shadow">
               <div>
                 <span className="text-sm font-semibold text-gray-400">Óbitos este ano</span>
                 <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h3 className="text-xl font-bold">{data.obitosAno}</h3>
               </div>
             </div>
-            <div className="p-6 bg-white  rounded-xl shadow-lg">
+            <div className="p-6 bg-white  rounded-xl shadow">
               <div>
                 <span className="text-sm font-semibold text-gray-400">Óbitos hoje</span>
                 <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h3 className="text-xl font-bold">{data.obitosHoje}</h3>
               </div>
             </div>
-            <div className="p-6 bg-white  rounded-xl shadow-lg">
+            <div className="p-6 bg-white  rounded-xl shadow">
               <div>
                 <p className="text-sm font-semibold text-gray-400">Crescimento populacional este ano</p>
                 <p className="text-xs text-gray-400"> (Estimativa até o momento)(b)</p>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h3 className="text-xl font-bold">{data.crescimentoAno}</h3>
               </div>
             </div>
-            <div className="p-6 bg-white rounded-xl shadow-lg">
+            <div className="p-6 bg-white rounded-xl shadow">
               <div>
                 <p className="text-sm font-semibold text-gray-400">Crescimento populacional hoje</p>
                 <p className="text-xs text-gray-400"> (Estimativa até o momento)(b)</p>
               </div>
               <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-indigo-600 mr-2" />
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
                 <h3 className="text-xl font-bold">{data.crescimentoHoje}</h3>
               </div>
             </div>
           </div>
           <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="bg-white p-6 rounded-xl shadow">
               <h3 className="text-xl font-bold">Evolução da população Brasileira</h3>
               <p className="text-xs text-gray-400">Fonte: IBGE Instituto Brasileiro de Geografia estatística.</p>
               <LineChartComponent labels={json.data.map(item => item.ano)} valores={json.data.map(item => item.quantidade)} titulo={"População Brasileira"} />
-            </div>
-          </div>
-        </div>
-        <div className="grid gap-2 mt-4 md:grid-cols-7 lg:grid-cols-10">
+              <div className="grid gap-2 mt-4 md:grid-cols-7 lg:grid-cols-10">
           {json.data.map(item => (
             <div key={item.ano} className="p-1 bg-white text-center rounded shadow">
               <div>
@@ -115,8 +112,12 @@ function Populacao({ data, json }) {
           ))
           }
         </div>
+            </div>
+        
+          </div>
+        </div>
         <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
-          <div className="bg-white p-6 rounded-xl shadow-lg">
+          <div className="bg-white p-6 rounded-xl shadow">
             <p className="text-xs text-gray-400">(a): Representa apenas uma estimativa calculada por algorítimos deste próprio site levando em consideração números populacionais já existentes registrados pelo IBGE.</p>
             <p className="text-xs text-gray-400">(b): Representa apenas uma estimativa calculada por algorítimos deste próprio site levando em consideração números anuais já registrados pelo portal da transparência de registro civil transparencia.registrocivil.org.br.</p>
           </div>

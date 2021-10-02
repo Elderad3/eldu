@@ -1,7 +1,18 @@
 import { Chart } from 'primereact/chart';
 
 export default function LineChartComponent({labels, valores, titulo}) {
- //console.log(labels)
+
+const options = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false
+  },
+  plugins: {
+    title: {
+        display: false
+    },
+ },
+}
   const data = {
     labels: labels,
     datasets: [
@@ -18,7 +29,7 @@ export default function LineChartComponent({labels, valores, titulo}) {
       type="line" 
       data={data}
       height={"300px"}
-     options={{ maintainAspectRatio: false }}
+      options={options}
   />
   );
 }

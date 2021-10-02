@@ -3,7 +3,12 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'azul': '#3c8dbc',
+        'laranja': '#d64000'
+      }
+    },
     fontFamily: {
       'display': ["Segoe UI"]
     }
