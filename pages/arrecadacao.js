@@ -2,37 +2,37 @@ import Head from 'next/head'
 import Layout from '../components/Layout';
 import LineChartComponent from '../components/LineChartComponent';
 import BarChartComponent from '../components/BarChartComponent';
-import { CashIcon } from '@heroicons/react/solid'
+import { CurrencyDollarIcon } from '@heroicons/react/solid'
 import { server } from '../config/index'
 
-function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMeses }) {
+function Arrecadacao({ arrecadacaoAnualHistorico, arrecadacaoAnualUltimosDezAnos, arrecadacaoMensalUltimosDozeMeses }) {
   return (
     <Layout>
       <Head>
-        <title>CDI</title>
-        <meta name="description" content="Dados consolidados do CDI, evolução do CDI"></meta>
+        <title>Arrecadação</title>
+        <meta name="description" content="Dados consolidados da Arrecadação das Receita Federais - Receita Bruta, evolução"></meta>
       </Head>
       <div className="container">
         <div className="flex justify-between">
           <div className="mt-4">
-            <h1 className="text-2xl font-bold">CDI</h1>
+            <h1 className="text-2xl font-bold">Arrecadação das Receita Federais - Receita Bruta</h1>
           </div>
         </div>
         <div className="mt-4">
           <hr></hr>
-          <h4 className="mt-2 text-sm font-bold uppercase">CDI Últimos 10 anos - Consolidado Anual</h4>
+          <h4 className="mt-2 text-sm font-bold uppercase">Últimos 10 anos - Consolidado Anual</h4>
         </div>
         <div>
-          <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
+          <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
             <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
               <div className="bg-white p-6 rounded shadow">
                 <p className="text-xs text-gray-400">Fonte: Ipeadata</p>
-                <BarChartComponent labels={cdiAnualUltimosDezAnos.map(item => item.ano)}
-                  valores={cdiAnualUltimosDezAnos.map(item => item.total)} titulo={"CDI (%)"} />
+                <BarChartComponent labels={arrecadacaoAnualUltimosDezAnos.map(item => item.ano)}
+                  valores={arrecadacaoAnualUltimosDezAnos.map(item => item.total*1000000)} titulo={"Arrecadação (R$)"} />
               </div>
             </div >
-            <div className="grid mt-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-              {cdiAnualUltimosDezAnos.map(item => (
+            <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-5">
+              {arrecadacaoAnualUltimosDezAnos.map(item => (
                 <div key={item.ano} className="p-6 bg-white rounded shadow">
                   <div>
                     <span className="text-sm font-semibold text-gray-400">{item.ano}</span>
@@ -44,8 +44,8 @@ function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMe
                     }
                   </div>
                   <div className="flex justify-start items-center">
-                    <CashIcon className="h-6 w-6 text-azul mr-2" />
-                    <h1 className="font-bold">{transformarBR(item.total)}%</h1>
+                    <CurrencyDollarIcon className="h-6 w-6 text-azul mr-2" />
+                    <h1 className="font-bold">{transformarBR(item.total*1000000)}</h1>
                   </div>
                 </div>
               ))}
@@ -53,18 +53,18 @@ function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMe
           </div>
           <div className="mt-6">
             <hr className="bg-azul"></hr>
-            <h4 className="mt-2 text-sm font-bold uppercase">CDI Últimos 12 Meses - Consolidado Mensal</h4>
+            <h4 className="mt-2 text-sm font-bold uppercase">Últimos 12 Meses - Consolidado Mensal</h4>
           </div>
           <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
             <div className="grid mt-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
-              {cdiMensalUltimosDozeMeses.map(item => (
+              {arrecadacaoMensalUltimosDozeMeses.map(item => (
                 <div key={item.VALDATA} className="p-4 bg-white  rounded shadow">
                   <div>
                     <span className="text-xs font-semibold text-gray-400">{transformarMes(new Date(item.VALDATA).getMonth() + 1)}/{new Date(item.VALDATA).getFullYear()}</span>
                   </div>
                   <div className="flex justify-start items-center">
-                    <CashIcon className="h-6 w-6 text-azul mr-2" />
-                    <h1 className="text-xs font-bold">{item.VALVALOR}%</h1>
+                    <CurrencyDollarIcon className="h-6 w-6 text-azul mr-2" />
+                    <h1 className="text-xs font-bold">{transformarBR(item.VALVALOR*1000000)}</h1>
                   </div>
                 </div>
               ))}
@@ -72,25 +72,25 @@ function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMe
             <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
               <div className="bg-white p-6 rounded shadow">
                 <p className="text-xs text-gray-400">Fonte: Ipeadata</p>
-                <BarChartComponent labels={cdiMensalUltimosDozeMeses.map(item => new Date(item.VALDATA).getMonth() + 1 + "/" + new Date(item.VALDATA).getFullYear())}
-                  valores={cdiMensalUltimosDozeMeses.map(item => item.VALVALOR)} titulo={"CDI (%)"} />
+                <BarChartComponent labels={arrecadacaoMensalUltimosDozeMeses.map(item => new Date(item.VALDATA).getMonth() + 1 + "/" + new Date(item.VALDATA).getFullYear())}
+                  valores={arrecadacaoMensalUltimosDozeMeses.map(item => item.VALVALOR*1000000)} titulo={"Arrecadacao (R$)"} />
               </div>
             </div >
           </div>
           <div className="mt-6">
             <hr></hr>
-            <h4 className="mt-2 text-sm font-bold uppercase">CDI Dados Históricos - Consolidado Anual</h4>
+            <h4 className="mt-2 text-sm font-bold uppercase">Dados Históricos - Consolidado Anual</h4>
           </div>
           <div className="grid mt-2 gap-2 md:grid-cols-1 lg:grid-cols-1">
             <div className="bg-white p-6 rounded shadow">
               <p className="text-xs text-gray-400">Fonte: Ipeadata</p>
-              <LineChartComponent labels={cdiAnualHistorico.map(item => item.ano)} valores={cdiAnualHistorico.map(item => item.total)} titulo={"CDI Anual (%)"} />
-              <div className="grid gap-2 mt-4 md:grid-cols-7 lg:grid-cols-10">
-                {cdiAnualHistorico.map(item => (
+              <LineChartComponent labels={arrecadacaoAnualHistorico.map(item => item.ano)} valores={arrecadacaoAnualHistorico.map(item => item.total)} titulo={"Arrecadacao Anual (R$)"} />
+              <div className="grid gap-2 mt-4 md:grid-cols-3 lg:grid-cols-5">
+                {arrecadacaoAnualHistorico.map(item => (
                   <div key={item.ano} className="p-1 bg-white text-center rounded shadow">
                     <div>
                       <span className="text-sm font-bold text-gray-400"> {item.ano}:</span>
-                      <span className="text-sm font-bold text-black"> {transformarBR(item.total)}%</span>
+                      <span className="text-sm font-bold text-black"> {transformarBR(item.total*1000000)}</span>
                     </div>
                   </div>
                 ))
@@ -105,20 +105,20 @@ function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMe
 }
 
 export async function getServerSideProps() {
-  const cdi = await fetch(`${server}/api/cdi`)
-  const cdiMensalTotal = await cdi.json()
-  const filtroCdiAnualUltimosDezAnos = await cdiMensalTotal.value.filter(item => new Date(item.VALDATA).getFullYear() > new Date().getFullYear() - 10)
-  const cdiAnualUltimosDezAnos = calcularCdiPorAno(filtroCdiAnualUltimosDezAnos)
-  const cdiMensalUltimosDozeMeses = cdiMensalTotal.value.filter(item => cdiMensalTotal.value.indexOf(item) > cdiMensalTotal.value.length - 13)
-  const cdiAnualHistorico = calcularCdiPorAno(cdiMensalTotal.value)
+  const arrecadacao = await fetch(`${server}/api/arrecadacao`)
+  const arrecadacaoMensalTotal = await arrecadacao.json()
+  const filtroArrecadacaoAnualUltimosDezAnos = await arrecadacaoMensalTotal.value.filter(item => new Date(item.VALDATA).getFullYear() > new Date().getFullYear() - 10)
+  const arrecadacaoAnualUltimosDezAnos = calcularArrecadacaoPorAno(filtroArrecadacaoAnualUltimosDezAnos)
+  const arrecadacaoMensalUltimosDozeMeses = arrecadacaoMensalTotal.value.filter(item => arrecadacaoMensalTotal.value.indexOf(item) > arrecadacaoMensalTotal.value.length - 13)
+  const arrecadacaoAnualHistorico = calcularArrecadacaoPorAno(arrecadacaoMensalTotal.value)
   return {
-    props: { cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMeses }
+    props: { arrecadacaoAnualHistorico, arrecadacaoAnualUltimosDezAnos, arrecadacaoMensalUltimosDozeMeses }
   }
 }
 
-function calcularCdiPorAno(cdiMensal) {
+function calcularArrecadacaoPorAno(arrecadacaoMensal) {
   const separadoPorAno = []
-  const lista = cdiMensal.map(item => {
+  const lista = arrecadacaoMensal.map(item => {
     return {
       VALDATA: item.VALDATA,
       ANO: new Date(item.VALDATA).getFullYear(),
@@ -163,6 +163,6 @@ function transformarMes(number) {
 }
 
 function transformarBR(number) {
-  return number.toLocaleString('pt-br', { maximumFractionDigits: 2 })
+  return number.toLocaleString('pt-br', { maximumFractionDigits: 2 ,  style: 'currency', currency: 'BRL'})
 }
-export default Cdi
+export default Arrecadacao

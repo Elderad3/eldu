@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Layout from '../components/Layout';
 import LineChartComponent from '../components/LineChartComponent';
+import PieChartComponent from '../components/PieChartComponent';
+import BarChartComponent from '../components/BarChartComponent';
 import { UserGroupIcon } from '@heroicons/react/solid'
 import { server } from '../config/index'
 
@@ -18,8 +20,8 @@ function Populacao({ data, json }) {
           </div>
         </div>
         <div>
-        <div className="mt-6">
-          <hr></hr>
+          <div className="mt-6">
+            <hr></hr>
             <h4 className="mt-2 text-sm font-bold uppercase">Estimativas</h4>
           </div>
           <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-3">
@@ -33,52 +35,9 @@ function Populacao({ data, json }) {
                 <h1 className="text-xl font-bold">{data.populacao}</h1>
               </div>
             </div>
-            <div className="p-6 bg-white rounded shadow">
-              <div>
-                <span className="text-sm font-semibold text-gray-400">Nascimentos este ano</span>
-                <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
-                <h3 className="text-xl font-bold">{data.nascimentosAno}</h3>
-              </div>
-            </div>
-            <div className="p-6 bg-white rounded shadow">
-              <div>
-                <span className="text-sm font-semibold text-gray-400">Nascimentos hoje</span>
-                <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
-                <h3 className="text-xl font-bold">{data.nascimentosHoje}</h3>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid mt-4 gap-4 md:grid-cols-2 lg:grid-cols-4">
             <div className="p-6 bg-white  rounded shadow">
               <div>
-                <span className="text-sm font-semibold text-gray-400">Óbitos este ano</span>
-                <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
-                <h3 className="text-xl font-bold">{data.obitosAno}</h3>
-              </div>
-            </div>
-            <div className="p-6 bg-white  rounded shadow">
-              <div>
-                <span className="text-sm font-semibold text-gray-400">Óbitos hoje</span>
-                <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
-              </div>
-              <div className="flex justify-start items-center">
-                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
-                <h3 className="text-xl font-bold">{data.obitosHoje}</h3>
-              </div>
-            </div>
-            <div className="p-6 bg-white  rounded shadow">
-              <div>
-                <p className="text-sm font-semibold text-gray-400">Crescimento populacional este ano</p>
+                <p className="text-sm font-semibold text-gray-400">Crescimento Populacional Este Ano</p>
                 <p className="text-xs text-gray-400"> (Estimativa até o momento)(b)</p>
               </div>
               <div className="flex justify-start items-center">
@@ -88,8 +47,8 @@ function Populacao({ data, json }) {
             </div>
             <div className="p-6 bg-white rounded shadow">
               <div>
-                <p className="text-sm font-semibold text-gray-400">Crescimento populacional hoje</p>
-                <p className="text-xs text-gray-400"> (Estimativa até o momento)(b)</p>
+                <p className="text-sm font-semibold text-gray-400">Crescimento Populacional Hoje</p>
+                <p className="text-xs text-gray-400"> (Estimativa até {new Date().getHours()}:{new Date().getMinutes()})(b)</p>
               </div>
               <div className="flex justify-start items-center">
                 <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
@@ -97,27 +56,85 @@ function Populacao({ data, json }) {
               </div>
             </div>
           </div>
+          <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
+          <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
+            <div className="p-6 bg-white rounded shadow">
+              <div>
+                <span className="text-sm font-semibold text-gray-400">Nascimentos Hoje</span>
+                <span className="text-xs text-gray-400"> (Estimativa até {new Date().getHours()}:{new Date().getMinutes()})(b)</span>
+              </div>
+              <div className="flex justify-start items-center">
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
+                <h3 className="text-xl font-bold">{transformarBR(data.nascimentosHoje)}</h3>
+              </div>
+            </div>
+            <div className="p-6 bg-white  rounded shadow">
+              <div>
+                <span className="text-sm font-semibold text-gray-400">Óbitos Hoje</span>
+                <span className="text-xs text-gray-400"> (Estimativa até {new Date().getHours()}:{new Date().getMinutes()})(b)</span>
+              </div>
+              <div className="flex justify-start items-center">
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
+                <h3 className="text-xl font-bold">{transformarBR(data.obitosHoje)}</h3>
+              </div>
+            </div>
+            </div>
+            <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
+            <div className="p-6 bg-white  rounded shadow">
+            <PieChartComponent labels={['Nascimentos Hoje', 'Óbitos Hoje']} valores={[data.nascimentosHoje, data.obitosHoje]} titulo={"População Brasileira"} />
+            </div>
+            </div>
+            </div>
+            <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-2">
+            <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
+            <div className="p-6 bg-white rounded shadow">
+              <div>
+                <span className="text-sm font-semibold text-gray-400">Nascimentos Este Ano</span>
+                <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
+              </div>
+              <div className="flex justify-start items-center">
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
+                <h3 className="text-xl font-bold">{transformarBR(data.nascimentosAno)}</h3>
+              </div>
+            </div>
+            <div className="p-6 bg-white  rounded shadow">
+              <div>
+                <span className="text-sm font-semibold text-gray-400">Óbitos Este Ano</span>
+                <span className="text-xs text-gray-400"> (Estimativa até o momento)(b)</span>
+              </div>
+              <div className="flex justify-start items-center">
+                <UserGroupIcon className="h-6 w-6 text-azul mr-2" />
+                <h3 className="text-xl font-bold">{transformarBR(data.obitosAno)}</h3>
+              </div>
+            </div>
+            </div>
+            <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
+            <div className="p-6 bg-white  rounded shadow">
+            <PieChartComponent labels={['Nascimentos Este Ano', 'Óbitos Este Ano']} valores={[data.nascimentosAno, data.obitosAno]} titulo={"População Brasileira"}/>
+            </div>
+            </div>
+          </div>
           <div className="mt-6">
-          <hr className="text-azul"></hr>
+            <hr className="text-azul"></hr>
             <h4 className="mt-2 text-sm font-bold uppercase">Evolução Desde 1550</h4>
           </div>
           <div className="grid mt-2 gap-2 md:grid-cols-1 lg:grid-cols-1">
             <div className="bg-white p-6 rounded shadow">
               <p className="text-xs text-gray-400">Fonte: IBGE Instituto Brasileiro de Geografia estatística.</p>
-              <LineChartComponent labels={json.data.map(item => item.ano)} valores={json.data.map(item => item.quantidade)} titulo={"População Brasileira"} />
+              <LineChartComponent labels={json.map(item => item.ano)} valores={json.map(item => item.quantidade)} titulo={"População Brasileira"} />
               <div className="grid gap-2 mt-4 md:grid-cols-7 lg:grid-cols-10">
-          {json.data.map(item => (
-            <div key={item.ano} className="p-1 bg-white text-center rounded shadow">
-              <div>
-                <span className="text-sm font-bold text-gray-400"> {item.ano}:</span>
-                <span className="text-sm font-bold text-black"> {item.quantidade.toLocaleString('pt-br', { maximumFractionDigits: 0 })}</span>
+                {json.map(item => (
+                  <div key={item.ano} className="p-1 bg-white text-center rounded shadow">
+                    <div>
+                      <span className="text-sm font-bold text-gray-400"> {item.ano}:</span>
+                      <span className="text-sm font-bold text-black"> {item.quantidade.toLocaleString('pt-br', { maximumFractionDigits: 0 })}</span>
+                    </div>
+                  </div>
+                ))
+                }
               </div>
             </div>
-          ))
-          }
-        </div>
-            </div>
-        
+
           </div>
         </div>
         <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
@@ -134,10 +151,10 @@ function Populacao({ data, json }) {
 export async function getServerSideProps() {
   const data = {
     populacao: transformarBR(calcularPopulacao()),
-    nascimentosAno: transformarBR(calcularNascimentosAno()),
-    nascimentosHoje: transformarBR(calcularNascimentosHoje()),
-    obitosAno: transformarBR(calcularObitosAno()),
-    obitosHoje: transformarBR(calcularObitosHoje()),
+    nascimentosAno: calcularNascimentosAno(),
+    nascimentosHoje: calcularNascimentosHoje(),
+    obitosAno: calcularObitosAno(),
+    obitosHoje: calcularObitosHoje(),
     crescimentoAno: transformarBR(calcularCrescimentoAno()),
     crescimentoHoje: transformarBR(calcularCrescimentoHoje())
   }
@@ -201,7 +218,7 @@ function calcularCrescimentoHoje() {
   return calcularNascimentosHoje() - calcularObitosHoje()
 }
 
-function transformarBR(number){
+function transformarBR(number) {
   return number.toLocaleString('pt-br', { maximumFractionDigits: 0 })
 }
 

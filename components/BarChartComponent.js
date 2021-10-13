@@ -1,6 +1,6 @@
 import { Chart } from 'primereact/chart';
 
-export default function LineChartComponent({labels, valores, titulo}) {
+export default function BarChartComponent({labels, valores, titulo}) {
 
 const options = {
   maintainAspectRatio: false,
@@ -20,13 +20,13 @@ const options = {
         label: titulo,
         data: valores,
         fill: false,
-        borderColor: '#3c8dbc'
+        backgroundColor: '#3c8dbc',
       }
     ]
   };
   return (
       <Chart 
-      type="line" 
+      type="bar" 
       data={data}
       height={"300px"}
       options={options}

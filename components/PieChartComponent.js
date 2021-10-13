@@ -1,6 +1,6 @@
 import { Chart } from 'primereact/chart';
 
-export default function LineChartComponent({labels, valores, titulo}) {
+export default function PieChartComponent({labels, valores, titulo}) {
 
 const options = {
   maintainAspectRatio: false,
@@ -20,13 +20,21 @@ const options = {
         label: titulo,
         data: valores,
         fill: false,
-        borderColor: '#3c8dbc'
+        backgroundColor: [
+          "#125D98",
+          "#3C8DAD",
+          "#39A2DB",
+          "#022E57"
+      ],
+      hoverBackgroundColor: [
+          "#3D84B8"
+      ]
       }
     ]
   };
   return (
       <Chart 
-      type="line" 
+      type="pie" 
       data={data}
       height={"300px"}
       options={options}

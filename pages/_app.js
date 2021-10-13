@@ -1,6 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import Router from "next/router";
 import { useState, useEffect } from 'react';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 function MyApp({ Component, pageProps }) {
 
