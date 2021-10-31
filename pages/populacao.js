@@ -81,7 +81,7 @@ function Populacao({ data, json }) {
             </div>
             <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
             <div className="p-6 bg-white  rounded shadow">
-            <PieChartComponent labels={['Nascimentos Hoje', 'Óbitos Hoje']} valores={[data.nascimentosHoje, data.obitosHoje]} titulo={"População Brasileira"} />
+            <PieChartComponent labels={['Nascimentos Hoje', 'Óbitos Hoje']} valores={[Math.round(data.nascimentosHoje), Math.round(data.obitosHoje)]} titulo={"População Brasileira"} />
             </div>
             </div>
             </div>
@@ -110,10 +110,16 @@ function Populacao({ data, json }) {
             </div>
             <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-1">
             <div className="p-6 bg-white  rounded shadow">
-            <PieChartComponent labels={['Nascimentos Este Ano', 'Óbitos Este Ano']} valores={[data.nascimentosAno, data.obitosAno]} titulo={"População Brasileira"}/>
+            <PieChartComponent labels={['Nascimentos Este Ano', 'Óbitos Este Ano']} valores={[Math.round(data.nascimentosAno), Math.round(data.obitosAno)]} titulo={"População Brasileira"}/>
             </div>
             </div>
           </div>
+          <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
+          <div className="bg-white p-6 rounded-xl shadow">
+            <p className="text-xs text-gray-400">(a): Estimativas calculadas por algorítimos deste próprio site levando em consideração números populacionais já existentes registrados pelo IBGE.</p>
+            <p className="text-xs text-gray-400">(b): Estimativas calculadas por algorítimos deste próprio site levando em consideração números anuais já registrados pelo portal da transparência de registro civil transparencia.registrocivil.org.br.</p>
+          </div>
+        </div>
           <div className="mt-6">
             <hr className="text-azul"></hr>
             <h4 className="mt-2 text-sm font-bold uppercase">Evolução Desde 1550</h4>
@@ -127,7 +133,7 @@ function Populacao({ data, json }) {
                   <div key={item.ano} className="p-1 bg-white text-center rounded shadow">
                     <div>
                       <span className="text-sm font-bold text-gray-400"> {item.ano}:</span>
-                      <span className="text-sm font-bold text-black"> {item.quantidade.toLocaleString('pt-br', { maximumFractionDigits: 0 })}</span>
+                      <span className="text-sm font-bold text-black"> {transformarBR(item.quantidade)}</span>
                     </div>
                   </div>
                 ))
@@ -135,12 +141,6 @@ function Populacao({ data, json }) {
               </div>
             </div>
 
-          </div>
-        </div>
-        <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
-          <div className="bg-white p-6 rounded-xl shadow">
-            <p className="text-xs text-gray-400">(a): Representa apenas uma estimativa calculada por algorítimos deste próprio site levando em consideração números populacionais já existentes registrados pelo IBGE.</p>
-            <p className="text-xs text-gray-400">(b): Representa apenas uma estimativa calculada por algorítimos deste próprio site levando em consideração números anuais já registrados pelo portal da transparência de registro civil transparencia.registrocivil.org.br.</p>
           </div>
         </div>
       </div>

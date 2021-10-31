@@ -16,6 +16,16 @@ function SalarioMinimo({ salarioMinimoAnualDesde1994, salarioMinimoAnualUltimosD
         <div className="mt-4">
           <h1 className="text-2xl font-bold">Salário Mínimo no  Brasil</h1>
         </div>
+        <div className="mt-4">
+          <p className="text-base text-gray-500">Salário mínimo nominal vigente - não considera abonos salariais ocorridos nos períodos. 
+          O salário mínimo urbano foi instituído no Brasil por decreto-lei do presidente Getúlio Vargas, durante a ditadura 
+          do Estado Novo, e começou a vigorar em julho de 1940, com valores diferenciados entre estados e sub-regiões. Em 1943, 
+          foi incorporado à Consolidação das Leis do Trabalho (CLT) e, em 1963, foi estendido ao campo por meio do Estatuto do 
+          Trabalhador Rural. Foi nacionalmente unificado em maio de 1984, mas, desde 2000, a Lei Complementar 103 permite que os 
+          estados fixem pisos estaduais superiores ao mínimo nacional. Nota: Os dados desta série para o período em que a legislação
+           federal definia faixas diversificadas referem-se ao maior salário mínimo vigente no país. Mais informações: 
+           www.dieese.org.br/analisecestabasica/salarioMinimo.html e Evolução dos salários mínimos regionais.</p>
+        </div>
         <div>
           <div className="mt-6">
           <hr></hr>
@@ -78,8 +88,14 @@ function SalarioMinimo({ salarioMinimoAnualDesde1994, salarioMinimoAnualUltimosD
 
         </div>
         <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
+        <div className="mt-6">
+          <hr></hr>
+            <h5 className="mt-2 text-sm font-bold uppercase">Perguntas e Respostas</h5>
+          </div>
           <div className="bg-white p-6 rounded shadow">
-            <p className="text-xs text-gray-400">(a): Representa apenas uma estimativa calculada por algorítimos deste próprio site com base em dados existentes do salário Mínimo</p>
+          <p className="text-base font-bold text-gray-500">Quando foi instituído o salário mínimo no Brasil?</p>
+            <p className="text-base text-gray-500">O salário mínimo urbano foi instituído no Brasil por decreto-lei do presidente Getúlio Vargas, durante a ditadura 
+          do Estado Novo, e começou a vigorar em julho de 1940, com valores diferenciados entre estados e sub-regiões.</p>
           </div>
         </div>
       </div>

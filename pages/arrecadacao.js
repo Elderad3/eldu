@@ -28,7 +28,7 @@ function Arrecadacao({ arrecadacaoAnualHistorico, arrecadacaoAnualUltimosDezAnos
               <div className="bg-white p-6 rounded shadow">
                 <p className="text-xs text-gray-400">Fonte: Ipeadata</p>
                 <BarChartComponent labels={arrecadacaoAnualUltimosDezAnos.map(item => item.ano)}
-                  valores={arrecadacaoAnualUltimosDezAnos.map(item => item.total*1000000)} titulo={"Arrecadação (R$)"} />
+                  valores={arrecadacaoAnualUltimosDezAnos.map(item => Math.round(item.total*1000000))} titulo={"Arrecadação (R$)"} />
               </div>
             </div >
             <div className="grid mt-2 gap-4 md:grid-cols-1 lg:grid-cols-5">
@@ -73,7 +73,7 @@ function Arrecadacao({ arrecadacaoAnualHistorico, arrecadacaoAnualUltimosDezAnos
               <div className="bg-white p-6 rounded shadow">
                 <p className="text-xs text-gray-400">Fonte: Ipeadata</p>
                 <BarChartComponent labels={arrecadacaoMensalUltimosDozeMeses.map(item => new Date(item.VALDATA).getMonth() + 1 + "/" + new Date(item.VALDATA).getFullYear())}
-                  valores={arrecadacaoMensalUltimosDozeMeses.map(item => item.VALVALOR*1000000)} titulo={"Arrecadacao (R$)"} />
+                  valores={arrecadacaoMensalUltimosDozeMeses.map(item => Math.round(item.VALVALOR*1000000))} titulo={"Arrecadacao (R$)"} />
               </div>
             </div >
           </div>
@@ -84,7 +84,7 @@ function Arrecadacao({ arrecadacaoAnualHistorico, arrecadacaoAnualUltimosDezAnos
           <div className="grid mt-2 gap-2 md:grid-cols-1 lg:grid-cols-1">
             <div className="bg-white p-6 rounded shadow">
               <p className="text-xs text-gray-400">Fonte: Ipeadata</p>
-              <LineChartComponent labels={arrecadacaoAnualHistorico.map(item => item.ano)} valores={arrecadacaoAnualHistorico.map(item => item.total)} titulo={"Arrecadacao Anual (R$)"} />
+              <LineChartComponent labels={arrecadacaoAnualHistorico.map(item => item.ano)} valores={arrecadacaoAnualHistorico.map(item => Math.round(item.total*1000000))} titulo={"Arrecadacao Anual (R$)"} />
               <div className="grid gap-2 mt-4 md:grid-cols-3 lg:grid-cols-5">
                 {arrecadacaoAnualHistorico.map(item => (
                   <div key={item.ano} className="p-1 bg-white text-center rounded shadow">

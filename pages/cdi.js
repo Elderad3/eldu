@@ -36,12 +36,6 @@ function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMe
                 <div key={item.ano} className="p-6 bg-white rounded shadow">
                   <div>
                     <span className="text-sm font-semibold text-gray-400">{item.ano}</span>
-                    {item.ano === new Date().getFullYear().toString()
-                      ?
-                      <span className="text-xs text-gray-400"> Até {transformarMes(new Date().getMonth() + 1)}</span>
-                      :
-                      <span className="text-xs text-gray-400"> Anual</span>
-                    }
                   </div>
                   <div className="flex justify-start items-center">
                     <CashIcon className="h-6 w-6 text-azul mr-2" />
@@ -64,7 +58,7 @@ function Cdi({ cdiAnualHistorico, cdiAnualUltimosDezAnos, cdiMensalUltimosDozeMe
                   </div>
                   <div className="flex justify-start items-center">
                     <CashIcon className="h-6 w-6 text-azul mr-2" />
-                    <h1 className="text-xs font-bold">{item.VALVALOR}%</h1>
+                    <h1 className="text-xs font-bold">{transformarBR(item.VALVALOR)}%</h1>
                   </div>
                 </div>
               ))}
@@ -163,6 +157,6 @@ function transformarMes(number) {
 }
 
 function transformarBR(number) {
-  return number.toLocaleString('pt-br', { maximumFractionDigits: 2 })
+  return number.toLocaleString('pt-br', { maximumFractionDigits: 3 })
 }
 export default Cdi

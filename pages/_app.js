@@ -1,7 +1,7 @@
 import 'tailwindcss/tailwind.css'
+import '../styles/global.css'
 import Router from "next/router";
 import { useState, useEffect } from 'react';
-import { ProgressSpinner } from 'primereact/progressspinner';
 
 function MyApp({ Component, pageProps }) {
 
@@ -28,7 +28,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       {loading ? (
-    <h1 className="flex justify-center items-center text-indigo-900 mt-6 h-full lg:h-screen overflow-auto">Carregando...</h1>
+        <>
+          <div class=" flex justify-center items-center h-full h-screen overflow-auto">
+            <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-azul"></div>
+          </div>
+        </>
       ) : (
         <Component {...pageProps} />
       )}

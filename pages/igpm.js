@@ -64,7 +64,7 @@ function Igpm({ igpmAnualHistorico, igpmAnualUltimosDezAnos, igpmMensalUltimosDo
                   </div>
                   <div className="flex justify-start items-center">
                     <CashIcon className="h-6 w-6 text-azul mr-2" />
-                    <h1 className="text-xs font-bold">{item.VALVALOR}%</h1>
+                    <h1 className="text-xs font-bold">{transformarBR(item.VALVALOR)}%</h1>
                   </div>
                 </div>
               ))}
@@ -110,7 +110,7 @@ export async function getServerSideProps() {
   const igpmAnual = await fetch(`${server}/api/igpm-anual`)
   const igpmAnualTotal = await igpmAnual.json()
 
-  const filtroIgpmAnualUltimosDezAnos = await igpmAnualTotal.value.filter(item => new Date(item.VALDATA).getFullYear() > new Date().getFullYear() - 10)
+  const filtroIgpmAnualUltimosDezAnos = await igpmAnualTotal.value.filter(item => new Date(item.VALDATA).getFullYear() > new Date().getFullYear() - 11)
   const igpmAnualUltimosDezAnos = calcularIgpmPorAno(filtroIgpmAnualUltimosDezAnos)
   const igpmMensalUltimosDozeMeses = igpmMensalTotal.value.filter(item => igpmMensalTotal.value.indexOf(item) > igpmMensalTotal.value.length - 13)
   const igpmAnualHistorico = calcularIgpmPorAno(igpmAnualTotal.value)
