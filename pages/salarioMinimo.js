@@ -29,7 +29,7 @@ function SalarioMinimo({ salarioMinimoAnualDesde1994, salarioMinimoAnualUltimosD
         <div>
           <div className="mt-6">
           <hr></hr>
-            <h5 className="mt-2 text-sm font-bold uppercase">Últimos 10 anos</h5>
+            <h5 className="mt-2 uppercase text-base font-bold text-gray-500">Últimos 10 anos</h5>
           </div>
           <div className="grid mt-2 gap-4 md:grid-cols-5 lg:grid-cols-10">
             {salarioMinimoAnualUltimosDezAnos.map(item => (
@@ -46,7 +46,7 @@ function SalarioMinimo({ salarioMinimoAnualDesde1994, salarioMinimoAnualUltimosD
           </div>
           <div className="mt-6">
            <hr></hr>
-            <h4 className="mt-2 text-sm font-bold uppercase">Estimativa para as próximas Décadas</h4>
+            <h4 className="mt-2 uppercase text-base font-bold text-gray-500">Estimativa para as próximas Décadas</h4>
           </div>
           <div className="grid mt-2 gap-4 md:grid-cols-5 lg:grid-cols-10">
             {estimativas.map(item => (
@@ -63,7 +63,7 @@ function SalarioMinimo({ salarioMinimoAnualDesde1994, salarioMinimoAnualUltimosD
           </div>
           <div className="mt-6">
             <hr></hr>
-            <h4 className="mt-2 text-sm font-bold uppercase">Evolução Desde a Implantação do Plano Real</h4>
+            <h4 className="mt-2 uppercase text-base font-bold text-gray-500">Evolução Desde a Implantação do Plano Real</h4>
           </div>
         <div className="grid mt-2 gap-2 md:grid-cols-1 lg:grid-cols-1">
           <div className="bg-white p-6 rounded shadow">
@@ -90,7 +90,7 @@ function SalarioMinimo({ salarioMinimoAnualDesde1994, salarioMinimoAnualUltimosD
         <div className="grid mt-4 gap-2 md:grid-cols-1 lg:grid-cols-1">
         <div className="mt-6">
           <hr></hr>
-            <h5 className="mt-2 text-sm font-bold uppercase">Perguntas e Respostas</h5>
+            <h5 className="mt-2 uppercase text-base font-bold text-gray-500">Perguntas e Respostas</h5>
           </div>
           <div className="bg-white p-6 rounded shadow">
           <p className="text-base font-bold text-gray-500">Quando foi instituído o salário mínimo no Brasil?</p>

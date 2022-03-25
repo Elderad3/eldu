@@ -12,6 +12,19 @@ const options = {
         display: false
     },
  },
+ scales: {
+  x: {
+      grid:{
+       display:false
+           }
+     },
+  y: 
+     {
+   grid:{
+    display:true
+        }
+     }
+         }
 }
   const data = {
     labels: labels,
